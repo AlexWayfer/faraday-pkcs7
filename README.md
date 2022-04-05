@@ -30,8 +30,35 @@ gem install faraday-pkcs7
 ```ruby
 require 'faraday/pkcs7'
 
-# TODO
+client_cert = OpenSSL::X509::Certificate.new(File.read('path/to/cer_file'))
+client_key = OpenSSL::PKey::RSA.new(File.read('path/to/key_file'), 'passphrase or empty string')
+
+server_cert = OpenSSL::X509::Certificate.new(File.read('path/to/cer_file'))
+cert_store = OpenSSL::X509::Store.new
+
+Faraday.new(
+  url: 'https://example.com/api/'
+) do |faraday|
+  faraday.use :pkcs7,
+    encrypt: false,
+    encryption_options: {
+      key: client_key,
+      certificate: client_cert,
+      flags: OpenSSL::PKCS7::BINARY | OpenSSL::PKCS7::NOCERTS | OpenSSL::PKCS7::NOCHAIN
+    },
+    decrypt: false,
+    decryption_options: {
+      ca_store: cert_store,
+      public_certificate: server_cert,
+      flags: OpenSSL::PKCS7::NOVERIFY
+    }
+end
 ```
+
+Options are optional, by default encryption and decryption are enabled. When disabled — there are only signing
+without encryption and verifying without decryption.
+
+For `encryption_options` and `decryption_options` see underlying gem: https://github.com/dmuneras/pkcs7-cryptographer
 
 ## Development
 
