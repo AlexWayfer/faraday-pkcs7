@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['lib/**/*', 'README.md', 'LICENSE.md', 'CHANGELOG.md']
 
-  spec.required_ruby_version = '>= 3.2', '< 4'
+  spec.required_ruby_version = '>= 3.2', '< 5'
 
   spec.add_dependency 'faraday', '~> 2.14.1'
   spec.add_dependency 'pkcs7-cryptographer', '~> 1.1'
