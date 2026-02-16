@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :audit do
-  gem 'bundler', '~> 2.0'
   gem 'bundler-audit', '~> 0.9.0'
 end
 
