@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.2', '< 4'
 
-  spec.add_runtime_dependency 'faraday', '~> 2.9.0'
+  spec.add_runtime_dependency 'faraday', '~> 2.14.1'
   spec.add_runtime_dependency 'pkcs7-cryptographer', '~> 1.1'
 end
